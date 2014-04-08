@@ -64,7 +64,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    
+    [super viewDidAppear:animated];
     if ([self.passkeySwitch isOn]) {
         NSError *error = nil;
         self.userNameTF.text = [[NSUserDefaults standardUserDefaults]objectForKey:kBaiduUserName];
@@ -100,6 +100,7 @@
         };
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -107,6 +108,7 @@
         [self saveLoginInfo];
     }
 }
+
 
 - (void)saveLoginInfo
 {
@@ -581,13 +583,15 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         //[NSThread sleepForTimeInterval:1];
         NSInteger index = 0;
+        NSInteger direction = 1;
         while (index <= 100) {
             [NSThread sleepForTimeInterval:0.02];
             dispatch_async(dispatch_get_main_queue(), ^{
                 button.progress = (index / 100.0f);
             });
-            index++;
-            if (index==99) index = 1;
+            index += direction;
+            if (index== 99) direction = -1;
+            else if (index == 0) direction = 1;
             if (!button.progressing) return;
         }
     });

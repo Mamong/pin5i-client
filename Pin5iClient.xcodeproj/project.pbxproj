@@ -117,6 +117,7 @@
 		E78D8C3818F27776000CD6F1 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B1E18F2700D000CD6F1 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78D8C3918F277A5000CD6F1 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B8718F2700D000CD6F1 /* SCGIFImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78D8C3A18F2781A000CD6F1 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B2618F2700D000CD6F1 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E7ACE82F18F2DA1C00A45A2F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E7ACE82E18F2DA1C00A45A2F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +353,7 @@
 		E78D8C2718F274BE000CD6F1 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		E78D8C2818F274BE000CD6F1 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightViewController.xib; sourceTree = "<group>"; };
 		E78D8C2918F274BE000CD6F1 /* SubscriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionViewController.xib; sourceTree = "<group>"; };
+		E7ACE82E18F2DA1C00A45A2F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,7 +431,7 @@
 		E78D8AA218F26F33000CD6F1 /* Pin5iClient */ = {
 			isa = PBXGroup;
 			children = (
-				E78D8AF418F27000000CD6F1 /* modal */,
+				E78D8AF418F27000000CD6F1 /* model */,
 				E78D8ACB18F26FEB000CD6F1 /* view */,
 				E78D8ADB18F26FF9000CD6F1 /* viewcontroller */,
 				E78D8AFB18F27005000CD6F1 /* Helper */,
@@ -446,6 +448,7 @@
 		E78D8AA318F26F34000CD6F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E7ACE82E18F2DA1C00A45A2F /* README.md */,
 				E78D8AA418F26F34000CD6F1 /* Pin5iClient-Info.plist */,
 				E78D8AA518F26F34000CD6F1 /* InfoPlist.strings */,
 				E78D8AA818F26F34000CD6F1 /* main.m */,
@@ -519,7 +522,7 @@
 			path = viewcontroller;
 			sourceTree = "<group>";
 		};
-		E78D8AF418F27000000CD6F1 /* modal */ = {
+		E78D8AF418F27000000CD6F1 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				E78D8AF518F27000000CD6F1 /* EBookDetailItem.h */,
@@ -527,7 +530,7 @@
 				E78D8AF718F27000000CD6F1 /* EbookListItem.h */,
 				E78D8AF818F27000000CD6F1 /* EbookListItem.m */,
 			);
-			path = modal;
+			path = model;
 			sourceTree = "<group>";
 		};
 		E78D8AFB18F27005000CD6F1 /* Helper */ = {
@@ -902,6 +905,7 @@
 				E78D8BFE18F27031000CD6F1 /* Default.png in Resources */,
 				E78D8C0618F27031000CD6F1 /* loading.png in Resources */,
 				E78D8BF318F27031000CD6F1 /* AvatarPlaceholder@2x.png in Resources */,
+				E7ACE82F18F2DA1C00A45A2F /* README.md in Resources */,
 				E78D8BF718F27031000CD6F1 /* blueLedSmall@2x.png in Resources */,
 				E78D8BBE18F2700D000CD6F1 /* MJRefresh.bundle in Resources */,
 				E78D8BF618F27031000CD6F1 /* blueLedSmall.png in Resources */,
@@ -1213,6 +1217,7 @@
 				E78D8AC718F26F34000CD6F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E78D8AC818F26F34000CD6F1 /* Build configuration list for PBXNativeTarget "Pin5iClientTests" */ = {
 			isa = XCConfigurationList;
@@ -1221,6 +1226,7 @@
 				E78D8ACA18F26F34000CD6F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -18,7 +18,7 @@
 
 #define kCustomRowCount          9
 #define kRequestTimeoutInterval 8.0
-#define kWidthForCellTextLabel 300
+#define kWidthForCellTextLabel 260
 
 @interface BookListViewController ()<UITableViewDataSource, UITableViewDelegate, NSURLConnectionDataDelegate, UIScrollViewDelegate, MJRefreshBaseViewDelegate>{
     
@@ -340,20 +340,20 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     }
     if ([self.ebookList count]) {
         EbookListItem *item = [self.ebookList objectAtIndex:indexPath.row];
         [detailString appendFormat:@"%@ 发布于 %@",[item author],[[item date]description]];
-        cell.separatorInset = UIEdgeInsetsZero;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         [cell.textLabel setNumberOfLines:0];
-        [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [cell.textLabel setLineBreakMode:NSLineBreakByCharWrapping];
         CGRect framForLabel;
         framForLabel.origin = CGPointMake(80, 8);
         framForLabel.size = [self sizeForLabelWithTitle:[item title]];
+        cell.frame = framForLabel;
         cell.textLabel.text = [item title];
         
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
@@ -376,7 +376,7 @@
         }else{
             cell.textLabel.text = @"";
         }
-        cell.textLabel.font = [UIFont systemFontOfSize:20];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.text = @"";
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
@@ -418,7 +418,7 @@
     CGSize maximumSize = CGSizeMake(kWidthForCellTextLabel, MAXFLOAT);
     CGSize expectedSize = [string sizeWithFont:font
                                constrainedToSize:maximumSize
-                                   lineBreakMode:NSLineBreakByWordWrapping];
+                                   lineBreakMode:NSLineBreakByCharWrapping];
 
     return expectedSize;
 }
