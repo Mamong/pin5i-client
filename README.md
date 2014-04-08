@@ -10,16 +10,16 @@ this project uses several open sources,they are:
 
 3.PPRevealSideviewController this one organizes the skeleton of this project.
 
-4.SwipeView we use this to show the covers of the book
+4.SwipeView we use this to show the covers of the book.
 
-5.Spinkit we use this to generate downloan indicator dynamiclly.
+5.Spinkit we use this to generate download indicator dynamically.
 
-6.STKeychain we use this to store pin5i and baidu's passkey
+6.STKeychain we use this to store pin5i and baidu's passkey.
 
-7.JNJProgressButton we use this to show we're loging baidu
+7.JNJProgressButton we use this to show we're logining baidu.
 
-8.HEXCMyUIButton this one is not in use currently,may used when we need do something,such as download the file,or move the file to another directory,etc.
+8.HEXCMyUIButton this one is not in use currently,may used when we need do something,such as downloading the file,or moving the file to another directory,etc.
 
-9.Hpple we use this to parse html string,i write method to use it conveniently.you just can get this method in this project.
+9.Hpple we use this to parse html string,i write a method to use it conveniently.you just can get it in this project.
 
 10.MJRefresh we use this to support pull and push to refresh.
