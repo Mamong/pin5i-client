@@ -82,11 +82,16 @@
 
 
 - (void)requestFailed:(ASIHTTPRequest *)request{
-    //[self handleError:@"验证失败"];
+    if (request.tag == kVerifyRequest) {
+        [self handleError:@"failed to send verify request"];
+    }
+    else if (request.tag == kSaveFileRequest){
+        [self handleError:@"failed to send save request"];
+    }
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request{ //verify提交提取码之后 link发送请求
-    //[request cancel];
+    
 #ifdef MSDEBUG
     
     NSLog(@"===verify cookie ====");
@@ -99,20 +104,23 @@
         self.connection = [NSURLConnection connectionWithRequest:linkRequest delegate:self];
 
         NSData *responseData = [request responseData];
+        NSError *error = nil;
         NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-        int errnoNum = [[responseDict valueForKey:@"errno"]intValue];
-        switch (errnoNum) {
-            case 0:
-                NSLog(@"extract success");
-                break;
-            case -62:
-                NSLog(@"extract code wrong");
-                break;
-            case -63:
-                NSLog(@"verify code wrong");
-            default:
-                NSLog(@"unknown error");
-                break;
+        if (!error) {
+            int errnoNum = [[responseDict valueForKey:@"errno"]intValue];
+            switch (errnoNum) {
+                case 0:
+                    NSLog(@"extract success");
+                    break;
+                case -62:
+                    NSLog(@"extract code wrong");
+                    break;
+                case -63:
+                    NSLog(@"verify code wrong");
+                default:
+                    NSLog(@"unknown error");
+                    break;
+            }
         }
         //如果提交的提取码错误，则会返回错误码，可以根据错误码区分是单次错误还是连续相同提取码错误，如果是后者则会返回验证图片
         //单次错误:
@@ -128,36 +136,40 @@
 
     }else if (request.tag == kSaveFileRequest){
         NSData *responseData = [request responseData];
+        NSError *error = nil;
         NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"response dict %@",responseDict);
-        int errnoNum = [[responseDict valueForKey:@"errno"]intValue];
-        switch (errnoNum) {
-            case 0:
-            {
-                NSLog(@"save success");
-                [self handleError:@"save success"];
-                break;
+        if (!error) {
+            int errnoNum = [[responseDict valueForKey:@"errno"]intValue];
+            switch (errnoNum) {
+                case 0:
+                {
+                    NSLog(@"save success");
+                    [self handleError:@"save success"];
+                    break;
+                }
+                case 12:
+                {
+                    NSLog(@"file exists already");
+                    [self handleError:@"file exists already"];
+                    break;
+                }
+                case 2:
+                    NSLog(@"file not exists");
+                    [self handleError:@"file not exists"];
+                    break;
+                case -6:
+                    NSLog(@"you haven't login");
+                    [self handleError:@"you haven't login"];
+                    break;
+                default:
+                    NSLog(@"unknown error");
+                    [self handleError:@"uknown error"];
+                    break;
             }
-            case 12:
-            {
-                NSLog(@"file exists already");
-                [self handleError:@"file exists already"];
-                break;
-            }
-            case 2:
-                NSLog(@"file not exists");
-                [self handleError:@"file not exists"];
-                break;
-            case -6:
-                NSLog(@"you haven't login");
-                [self handleError:@"you haven't login"];
-                break;
-            default:
-                NSLog(@"unknown error");
-                [self handleError:@"uknown error"];
-                break;
-        }
 
+        }
+        
     }
 }
 
@@ -190,7 +202,7 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [self.filePageData appendData:data];
- }
+}
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
@@ -207,20 +219,23 @@
     dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(aQueue, ^(void){
         fileName = [[HTMLParseHelp basicTextParseFromData:self.filePageData withXpath:@"//*[@id='fileName']/@data-fn" options:MSHTMLParseDefault alterItem:nil]objectAtIndex:0];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIFont *font = [UIFont systemFontOfSize:13];
-            CGSize maximumSize = CGSizeMake(220, MAXFLOAT);
-            CGSize expectedSize = [fileName sizeWithFont:font
-                                       constrainedToSize:maximumSize
-                                           lineBreakMode:NSLineBreakByWordWrapping];
-            CGRect newFrame ;
-            newFrame.origin = weakSelf.fileNameTF.frame.origin;
-            newFrame.size = expectedSize;
-            weakSelf.fileNameTF.frame = newFrame;
-            [weakSelf.fileNameTF setLineBreakMode:NSLineBreakByWordWrapping];
-            [weakSelf.fileNameTF setNumberOfLines:0];
-            weakSelf.fileNameTF.text = fileName;
-        });
+        if ([fileName length]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIFont *font = [UIFont systemFontOfSize:13];
+                CGSize maximumSize = CGSizeMake(220, MAXFLOAT);
+                CGSize expectedSize = [fileName sizeWithFont:font
+                                           constrainedToSize:maximumSize
+                                               lineBreakMode:NSLineBreakByWordWrapping];
+                CGRect newFrame ;
+                newFrame.origin = weakSelf.fileNameTF.frame.origin;
+                newFrame.size = expectedSize;
+                weakSelf.fileNameTF.frame = newFrame;
+                [weakSelf.fileNameTF setLineBreakMode:NSLineBreakByWordWrapping];
+                [weakSelf.fileNameTF setNumberOfLines:0];
+                weakSelf.fileNameTF.text = fileName;
+            });
+
+        }
         
 #ifdef MSDEBUG
         NSLog(@"=====weakSelf.fileNameTF.text ==%@",fileName);

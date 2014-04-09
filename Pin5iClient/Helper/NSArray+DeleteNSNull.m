@@ -11,7 +11,7 @@
 @implementation NSArray (DeleteNSNull)
 
 
-- (NSArray *)arrayWithouNSNull{
+- (NSArray *)arrayWithoutNSNull{
     NSMutableArray *resultArray = [NSMutableArray array];
     id object;
     if ([self count]) {

@@ -234,12 +234,12 @@ static int _offset = 120;
 
     if (notification == nil) {
         
-        [mobileListSubscribed setArray:[[userCenter mobileListChosed]arrayWithouNSNull]];
-        [softListSubscribed setArray:[[userCenter softListChosed]arrayWithouNSNull]];
-        [webListSubscribed setArray:[[userCenter webListChosed]arrayWithouNSNull]];
-        [databaseListSubscribed setArray:[[userCenter databaseListChosed]arrayWithouNSNull]];
-        [applicationListSubscribed setArray:[[userCenter applicationListChosed]arrayWithouNSNull]];
-        [vipListSubscribed setArray:[[userCenter vipListChosed]arrayWithouNSNull]];
+        [mobileListSubscribed setArray:[[userCenter mobileListChosed]arrayWithoutNSNull]];
+        [softListSubscribed setArray:[[userCenter softListChosed]arrayWithoutNSNull]];
+        [webListSubscribed setArray:[[userCenter webListChosed]arrayWithoutNSNull]];
+        [databaseListSubscribed setArray:[[userCenter databaseListChosed]arrayWithoutNSNull]];
+        [applicationListSubscribed setArray:[[userCenter applicationListChosed]arrayWithoutNSNull]];
+        [vipListSubscribed setArray:[[userCenter vipListChosed]arrayWithoutNSNull]];
         
     }else{
         
@@ -249,7 +249,7 @@ static int _offset = 120;
         NSString *sectionName = [sectionTitle objectAtIndex:whichSectionToUpdate];
         NSMutableArray *selectArray = [titleToListDicSubscribed objectForKey:sectionName];
         NSMutableArray *rawArray = [[userCenter chosedTitleToListDic] objectForKey:sectionName];
-        [selectArray setArray:[rawArray arrayWithouNSNull]];
+        [selectArray setArray:[rawArray arrayWithoutNSNull]];
         
         NSRange range = NSMakeRange(whichSectionToUpdate, 1);
         NSIndexSet *sectionToReload = [NSIndexSet indexSetWithIndexesInRange:range];

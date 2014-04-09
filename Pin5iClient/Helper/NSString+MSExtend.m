@@ -42,8 +42,8 @@
 
 
 
-// from
-// to
+// from http://www.pin5i.com/avatars/upload/000/10/13/27_avatar_small.jpg
+// to   http://www.pin5i.com/avatars/upload/000/10/13/27_avatar_medium.jpg
 - (NSString *)smallAvatarToMedium
 {
     NSMutableString *saw = [NSMutableString stringWithString:self];
@@ -88,9 +88,12 @@
     return [NSString stringWithFormat:@"from=%@&%@",from,shareid];
 }
 
+
+// 34.56  vs 35388
+// when (34.56-1)*1024 > 35288 return NO;
 - (BOOL)evaluateWithSize:(NSNumber *)number
 {
-    float sizeFloat = ([self floatValue]-1)*1024;NSLog(@"size float is %f",sizeFloat);
+    float sizeFloat = ([self floatValue]-1)*1024;
     return sizeFloat > [number unsignedIntValue];
 }
 

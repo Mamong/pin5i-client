@@ -63,6 +63,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissLoginVC)];
+    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
+    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"登陆", @"")];
+    item.rightBarButtonItem = rightItem;
+    [topbar pushNavigationItem:item animated:YES];
+    [self.view addSubview:topbar];
+    
+    BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kBaiduSwitchState]boolValue];
+    [self.passkeySwitch setOn:isOn];
+    
+    [self addObserver:self forKeyPath:@"isOnBaidu" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"isOnBaidu"];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if ([self.passkeySwitch isOn]) {
@@ -167,22 +190,7 @@
 
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissLoginVC)];
-    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
-    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"登陆", @"")];
-    item.rightBarButtonItem = rightItem;
-    [topbar pushNavigationItem:item animated:YES];
-    [self.view addSubview:topbar];
-    
-    BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kBaiduSwitchState]boolValue];
-    [self.passkeySwitch setOn:isOn];
-    
-    [self addObserver:self forKeyPath:@"isOnBaidu" options:NSKeyValueObservingOptionNew context:NULL];
-}
+
 
 - (void)requestCommonSetup:(ASIHTTPRequest *)request
 {
@@ -405,29 +413,6 @@
 
 
 
--(void)handleError:(NSString *)errorInfo
-{
-    UIAlertView *alertView =
-    [[UIAlertView alloc]initWithTitle:@"验证结果" message:errorInfo delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    alertView.tag = 100;
-    [alertView show];
-}
-
-
-
-
-- (IBAction) textFieldDoneEditing:(id)sender
-{
-    [sender resignFirstResponder];
-   
-}
-
-- (IBAction) textFieldChanged:(id)sender{
-     [self clearCookies];
-}
-
-
-
 - (void)sendLoginRequest:(id)sender{
     ASIFormDataRequest *loginRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"https://passport.baidu.com/v2/api/?login"]];
     loginRequest.tag = kBaiduLoginRequest;
@@ -543,36 +528,6 @@
 //        
 //}
 
-//---------------------------------------------------------
-//     didPresentAlertView:
-//---------------------------------------------------------
--(void)didPresentAlertView:(UIAlertView *)alertView
-{
-    [NSTimer scheduledTimerWithTimeInterval:13.5 target:alertView selector:@selector(dismissAnimated:) userInfo:nil repeats:NO];
-}
-
-
-//---------------------------------------------------------
-//     alertView:didDismissWithButtonIndex:
-//---------------------------------------------------------
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 100) {
-        NSRange range = [alertView.message rangeOfString:@"login success"];
-        if (range.location != NSNotFound ) {
-            //[self dismissViewControllerAnimated:YES completion:nil];
-          
-        }
-    }
-}
-
-
-
-- (void)dismissLoginVC
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 
 
@@ -608,17 +563,73 @@
 
 
 
-// -------------------------------------------------------------------------------
-//	method name
-// -------------------------------------------------------------------------------
+#pragma mark -
+#pragma mark switch,textfield and alert task
+-(void)handleError:(NSString *)errorInfo
+{
+    UIAlertView *alertView =
+    [[UIAlertView alloc]initWithTitle:@"验证结果" message:errorInfo delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    alertView.tag = 100;
+    [alertView show];
+}
+
+
+- (IBAction) textFieldDoneEditing:(id)sender
+{
+    [sender resignFirstResponder];
+    
+}
+
+- (IBAction) textFieldChanged:(id)sender{
+    [self clearCookies];
+}
+
+
+
 - (void)rememberOrForget:(id)sender
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:[NSNumber numberWithBool:self.passkeySwitch.on] forKey:kBaiduSwitchState];
 }
 
+#pragma mark -
+#pragma mark alert delegate
+//---------------------------------------------------------
+//     didPresentAlertView:
+//---------------------------------------------------------
+-(void)didPresentAlertView:(UIAlertView *)alertView
+{
+    [NSTimer scheduledTimerWithTimeInterval:13.5 target:alertView selector:@selector(dismissAnimated:) userInfo:nil repeats:NO];
+}
+
+
+//---------------------------------------------------------
+//     alertView:didDismissWithButtonIndex:
+//---------------------------------------------------------
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) {
+        NSRange range = [alertView.message rangeOfString:@"login success"];
+        if (range.location != NSNotFound ) {
+            //[self dismissViewControllerAnimated:YES completion:nil];
+            
+        }
+    }
+}
+
+
+
+- (void)dismissLoginVC
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+#pragma mark -
+#pragma mark keyValueObserve for the state of the switch
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{NSLog(@"ok");
+{
     if ([keyPath isEqualToString:@"isOnBaidu"]) {
         if ([self isOnBaidu]) {
             [self.loginButton setNeedsProgress:NO];
@@ -632,8 +643,5 @@
 }
 
 
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"isOnBaidu"];
-}
+
 @end

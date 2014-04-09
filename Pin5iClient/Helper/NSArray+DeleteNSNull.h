@@ -11,5 +11,5 @@
 @interface NSArray (DeleteNSNull)
 
 
-- (NSArray *)arrayWithouNSNull;
+- (NSArray *)arrayWithoutNSNull;
 @end

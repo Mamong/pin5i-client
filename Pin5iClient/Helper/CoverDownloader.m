@@ -94,16 +94,18 @@
         }
         NSNumber *size = [NSNumber numberWithUnsignedInt:[self.activeDownload length]];
         [self.ebookDetail.coverDownloadSizeArray replaceObjectAtIndex:self.index withObject:size];
-        self.activeDownload = nil;
-
-        // Release the connection now that it's finished
-        self.imageConnection = nil;
-
-    // call our delegate and tell it that our icon is ready for display
+       
     
     }else if (!image){
         [self.ebookDetail.coverArray replaceObjectAtIndex:self.index withObject:@"BADRequest"];
     }
+    self.activeDownload = nil;
+    
+    // Release the connection now that it's finished
+    self.imageConnection = nil;
+    
+    // call our delegate and tell it that our icon is ready for display
+    
     if (self.completionHandler)
         self.completionHandler();
     

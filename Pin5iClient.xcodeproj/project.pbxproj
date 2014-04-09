@@ -42,7 +42,6 @@
 		E78D8B0D18F27005000CD6F1 /* MSUserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B0418F27005000CD6F1 /* MSUserCenter.m */; };
 		E78D8B0E18F27005000CD6F1 /* NSArray+DeleteNSNull.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B0618F27005000CD6F1 /* NSArray+DeleteNSNull.m */; };
 		E78D8B0F18F27005000CD6F1 /* NSString+MSExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B0818F27005000CD6F1 /* NSString+MSExtend.m */; };
-		E78D8B9018F2700D000CD6F1 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B1218F2700D000CD6F1 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78D8BB718F2700D000CD6F1 /* HEXCMyCustomTabBarControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B6A18F2700D000CD6F1 /* HEXCMyCustomTabBarControllerViewController.m */; };
 		E78D8BB818F2700D000CD6F1 /* HEXCMyUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B6C18F2700D000CD6F1 /* HEXCMyUIButton.m */; };
 		E78D8BB918F2700D000CD6F1 /* HTMLParseHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B6F18F2700D000CD6F1 /* HTMLParseHelp.m */; };
@@ -118,6 +117,7 @@
 		E78D8C3918F277A5000CD6F1 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B8718F2700D000CD6F1 /* SCGIFImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78D8C3A18F2781A000CD6F1 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B2618F2700D000CD6F1 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7ACE82F18F2DA1C00A45A2F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E7ACE82E18F2DA1C00A45A2F /* README.md */; };
+		E7B4E94C18F4D3E400170C82 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B2018F2700D000CD6F1 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,8 +189,6 @@
 		E78D8B0618F27005000CD6F1 /* NSArray+DeleteNSNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DeleteNSNull.m"; sourceTree = "<group>"; };
 		E78D8B0718F27005000CD6F1 /* NSString+MSExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MSExtend.h"; sourceTree = "<group>"; };
 		E78D8B0818F27005000CD6F1 /* NSString+MSExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MSExtend.m"; sourceTree = "<group>"; };
-		E78D8B1118F2700D000CD6F1 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
-		E78D8B1218F2700D000CD6F1 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
 		E78D8B1418F2700D000CD6F1 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		E78D8B1518F2700D000CD6F1 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		E78D8B1618F2700D000CD6F1 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -556,9 +554,8 @@
 		E78D8B1018F2700D000CD6F1 /* third */ = {
 			isa = PBXGroup;
 			children = (
-				E78D8B1118F2700D000CD6F1 /* ASIHTTPRequest.h */,
-				E78D8B1218F2700D000CD6F1 /* ASIHTTPRequest.m */,
-				E78D8B1318F2700D000CD6F1 /* Classes */,
+				E7B4E94718F4D2C100170C82 /* STKeychain */,
+				E78D8B1318F2700D000CD6F1 /* ASIHTTPRequest */,
 				E78D8B6818F2700D000CD6F1 /* HEXCMyUIButton */,
 				E78D8B6D18F2700D000CD6F1 /* HTMLParser */,
 				E78D8B7618F2700D000CD6F1 /* JNJProgressButton */,
@@ -566,14 +563,12 @@
 				E78D8B8218F2700D000CD6F1 /* PPRevealSideviewController */,
 				E78D8B8518F2700D000CD6F1 /* SCGIFImageView */,
 				E78D8B8818F2700D000CD6F1 /* SpinKit */,
-				E78D8B8B18F2700D000CD6F1 /* STKeychain.h */,
-				E78D8B8C18F2700D000CD6F1 /* STKeychain.m */,
 				E78D8B8D18F2700D000CD6F1 /* SwipeView */,
 			);
 			path = third;
 			sourceTree = "<group>";
 		};
-		E78D8B1318F2700D000CD6F1 /* Classes */ = {
+		E78D8B1318F2700D000CD6F1 /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
 				E78D8B1418F2700D000CD6F1 /* ASIAuthenticationDialog.h */,
@@ -603,7 +598,7 @@
 				E78D8B3C18F2700D000CD6F1 /* S3 */,
 				E78D8B4A18F2700D000CD6F1 /* Tests */,
 			);
-			path = Classes;
+			path = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
 		E78D8B2818F2700D000CD6F1 /* ASIWebPageRequest */ = {
@@ -818,6 +813,15 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		E7B4E94718F4D2C100170C82 /* STKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				E78D8B8B18F2700D000CD6F1 /* STKeychain.h */,
+				E78D8B8C18F2700D000CD6F1 /* STKeychain.m */,
+			);
+			name = STKeychain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -960,6 +964,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B4E94C18F4D3E400170C82 /* ASIHTTPRequest.m in Sources */,
 				E78D8C3A18F2781A000CD6F1 /* ASINetworkQueue.m in Sources */,
 				E78D8C3918F277A5000CD6F1 /* SCGIFImageView.m in Sources */,
 				E78D8C3818F27776000CD6F1 /* ASIFormDataRequest.m in Sources */,
@@ -978,7 +983,6 @@
 				E78D8BC018F2700D000CD6F1 /* MJRefreshFooterView.m in Sources */,
 				E78D8B0D18F27005000CD6F1 /* MSUserCenter.m in Sources */,
 				E78D8AEE18F26FF9000CD6F1 /* BookListViewController.m in Sources */,
-				E78D8B9018F2700D000CD6F1 /* ASIHTTPRequest.m in Sources */,
 				E78D8BC118F2700D000CD6F1 /* MJRefreshHeaderView.m in Sources */,
 				E78D8BB718F2700D000CD6F1 /* HEXCMyCustomTabBarControllerViewController.m in Sources */,
 				E78D8AFA18F27000000CD6F1 /* EbookListItem.m in Sources */,

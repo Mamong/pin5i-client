@@ -97,6 +97,7 @@
         _requestPageIndex = 0;
         _data = nil;
         [_ebookList removeAllObjects];
+        [self.ebookListTab reloadData];
         [self startDownloadWithColumn:self.column page:1];
     }
 }
@@ -376,7 +377,7 @@
         }else{
             cell.textLabel.text = @"";
         }
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.font = [UIFont systemFontOfSize:20];
         cell.detailTextLabel.text = @"";
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
@@ -385,7 +386,19 @@
     
     return cell;
 }
-
+// -------------------------------------------------------------------------------
+//	sizeForLabelWithTitle
+// -------------------------------------------------------------------------------
+- (CGSize)sizeForLabelWithTitle:(NSString *)string
+{
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize maximumSize = CGSizeMake(kWidthForCellTextLabel, MAXFLOAT);
+    CGSize expectedSize = [string sizeWithFont:font
+                             constrainedToSize:maximumSize
+                                 lineBreakMode:NSLineBreakByCharWrapping];
+    
+    return expectedSize;
+}
 
 #pragma mark - 
 #pragma mark UITableViewDelegate Methods
@@ -412,24 +425,10 @@
     }
 }
 
-- (CGSize)sizeForLabelWithTitle:(NSString *)string
-{
-    UIFont *font = [UIFont systemFontOfSize:14];
-    CGSize maximumSize = CGSizeMake(kWidthForCellTextLabel, MAXFLOAT);
-    CGSize expectedSize = [string sizeWithFont:font
-                               constrainedToSize:maximumSize
-                                   lineBreakMode:NSLineBreakByCharWrapping];
-
-    return expectedSize;
-}
 
 
-- (void)resetMJRefreshView
-{
-    // 让刷新控件恢复默认的状态
-    [_header endRefreshing];
-    [_footer endRefreshing];
-}
+
+
 
 
 
@@ -514,7 +513,13 @@
     }
 }
 
-
+#pragma mark reset refresh view
+- (void)resetMJRefreshView
+{
+    // 让刷新控件恢复默认的状态
+    [_header endRefreshing];
+    [_footer endRefreshing];
+}
 
 
 

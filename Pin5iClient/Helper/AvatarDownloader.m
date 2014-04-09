@@ -114,6 +114,8 @@
             CGSize itemSize = CGSizeMake(kAppIconSize, kAppIconSize);
             UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0f);
             CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+            UIBezierPath *bezierpath = [UIBezierPath bezierPathWithRoundedRect:imageRect cornerRadius:5.0];
+            [bezierpath addClip];
             [image drawInRect:imageRect];
             self.ebookItem.avatarIcon = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
@@ -122,17 +124,18 @@
         {
             self.ebookItem.avatarIcon = image;
         }
-        self.activeDownload = nil;
-        
-        // Release the connection now that it's finished
-        self.imageConnection = nil;
-        
-        // call our delegate and tell it that our icon is ready for display
-       
     }else if(image == nil){
         self.ebookItem.avatarURL = @"http://www.pin5i.com/templates/default/images/noavatar_small.gif";
         self.ebookItem.avatarIcon = [UIImage imageNamed:@"noavatar_small.gif"];
     }
+    self.activeDownload = nil;
+    
+    // Release the connection now that it's finished
+    self.imageConnection = nil;
+    
+    // call our delegate and tell it that our icon is ready for display
+    
+
     if (self.completionHandler)
         self.completionHandler();
     

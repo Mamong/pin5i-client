@@ -8,7 +8,7 @@
 
 #import "MSUserCenter.h"
 
-#define kFilename @"subscription.txt"
+#define kFilename @"subscription.plist"
 #define kDataKey @"Data"
 
 @interface MSUserCenter (){
