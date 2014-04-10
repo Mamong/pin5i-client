@@ -369,5 +369,5 @@
 //登陆
 //bdcm <input type="hidden" name="bdcm" value="a596ff997bcb0a46811fbe096b63f6246b60af7d"/>
 //引用页   http://wappass.baidu.com/passport?login&authsite=1&tpl=netdisk&display=mobile&u=http%3A%2F%2Fpan.baidu.com%2Fwap%2Flink%3Fshareid%3D2863655745%26uk%3D1093492205%26uid%3D1395156119439_187%26ssid%3Dda52e1eb7777fb94121e9ec66adbbb83.3.1395156129.1.jk9fkAhbVV4W
-//username=chyy.meng%40163.com&passwodr=ASD1989416&submit=%E7%99%BB%E5%BD%95&quick_user=0&isphone=0&sp_login=waprate&uname_login=&loginmerge=1&vcodestr=&u=http%253A%252F%252Fpan.baidu.com%252Fwap%252Flink%253Fshareid%253D2863655745%2526uk%253D1093492205%2526uid%253D1395156393376_456%2526ssid%253Dda52e1eb7777fb94121e9ec66adbbb83.3.1395156129.1.jk9fkAhbVV4W&skin=default_v2&tpl=netdisk&ssid=&from=&uid=1395156393376_456&pu=&tn=&bdcm=a596ff997bcb0a46811fbe096b63f6246b60af7d&type=&bd_page_type=
+//username=chyy.meng%40163.com&passwodr=xxxxx&submit=%E7%99%BB%E5%BD%95&quick_user=0&isphone=0&sp_login=waprate&uname_login=&loginmerge=1&vcodestr=&u=http%253A%252F%252Fpan.baidu.com%252Fwap%252Flink%253Fshareid%253D2863655745%2526uk%253D1093492205%2526uid%253D1395156393376_456%2526ssid%253Dda52e1eb7777fb94121e9ec66adbbb83.3.1395156129.1.jk9fkAhbVV4W&skin=default_v2&tpl=netdisk&ssid=&from=&uid=1395156393376_456&pu=&tn=&bdcm=a596ff997bcb0a46811fbe096b63f6246b60af7d&type=&bd_page_type=
 
