@@ -213,7 +213,6 @@ static CGFloat const kJNJProgressStopWidth = 5.0f;
         }
         
         if (self.startButtonDidTapBlock) {
-            NSLog(@"invocated");
             self.startButtonDidTapBlock(self);
         }
     } else if (self.JNJState == JNJProgressButtonStateProgressing) {
@@ -222,7 +221,7 @@ static CGFloat const kJNJProgressStopWidth = 5.0f;
         if ([self.delegate respondsToSelector:@selector(progressButtonDidCancelProgress:)]) {
             [self.delegate progressButtonDidCancelProgress:self];
         }
-        
+        NSLog(@"cancel");
         if (self.progressDidCancelBlock) {
             self.progressDidCancelBlock(self);
         }
@@ -452,5 +451,9 @@ static CGFloat const kJNJProgressStopWidth = 5.0f;
     [super touchesCancelled:touches withEvent:event];
     [self setImageViewAlphaIfNeeded:1.0f];
 }
+
+
+
+
 
 @end

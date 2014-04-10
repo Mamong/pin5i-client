@@ -156,10 +156,10 @@
 		E78D8AD218F26FEB000CD6F1 /* SubscriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionCell.h; sourceTree = "<group>"; };
 		E78D8AD318F26FEB000CD6F1 /* SubscriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionCell.m; sourceTree = "<group>"; };
 		E78D8AD418F26FEB000CD6F1 /* SubscriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionCell.xib; sourceTree = "<group>"; };
-		E78D8ADC18F26FF9000CD6F1 /* BaiduLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduLoginController.h; sourceTree = "<group>"; };
-		E78D8ADD18F26FF9000CD6F1 /* BaiduLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduLoginController.m; sourceTree = "<group>"; };
-		E78D8ADE18F26FF9000CD6F1 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
-		E78D8ADF18F26FF9000CD6F1 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		E78D8ADC18F26FF9000CD6F1 /* BaiduLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BaiduLoginController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E78D8ADD18F26FF9000CD6F1 /* BaiduLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BaiduLoginController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		E78D8ADE18F26FF9000CD6F1 /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BookDetailViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E78D8ADF18F26FF9000CD6F1 /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BookDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78D8AE018F26FF9000CD6F1 /* BookListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListViewController.h; sourceTree = "<group>"; };
 		E78D8AE118F26FF9000CD6F1 /* BookListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListViewController.m; sourceTree = "<group>"; };
 		E78D8AE218F26FF9000CD6F1 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 		E78D8AF818F27000000CD6F1 /* EbookListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EbookListItem.m; sourceTree = "<group>"; };
 		E78D8AFC18F27005000CD6F1 /* AvatarDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarDownloader.h; sourceTree = "<group>"; };
 		E78D8AFD18F27005000CD6F1 /* AvatarDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarDownloader.m; sourceTree = "<group>"; };
-		E78D8AFE18F27005000CD6F1 /* BaiduPanPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduPanPanel.h; sourceTree = "<group>"; };
-		E78D8AFF18F27005000CD6F1 /* BaiduPanPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduPanPanel.m; sourceTree = "<group>"; };
+		E78D8AFE18F27005000CD6F1 /* BaiduPanPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BaiduPanPanel.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E78D8AFF18F27005000CD6F1 /* BaiduPanPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BaiduPanPanel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78D8B0018F27005000CD6F1 /* BaiduPanPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaiduPanPanel.xib; sourceTree = "<group>"; };
 		E78D8B0118F27005000CD6F1 /* CoverDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverDownloader.h; sourceTree = "<group>"; };
 		E78D8B0218F27005000CD6F1 /* CoverDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverDownloader.m; sourceTree = "<group>"; };

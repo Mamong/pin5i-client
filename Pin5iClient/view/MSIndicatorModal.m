@@ -1,6 +1,6 @@
 //
 //  MSIndicatorModal.m
-//  LoadCocoaChinaTest
+//  Pin5i-Client
 //
 //  Created by mamong on 14-4-1.
 //  Copyright (c) 2014年 mamong. All rights reserved.

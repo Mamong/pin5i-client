@@ -112,10 +112,8 @@
         if (image.size.width != kAppIconSize || image.size.height != kAppIconSize)
         {
             CGSize itemSize = CGSizeMake(kAppIconSize, kAppIconSize);
-            UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0f);
+            UIGraphicsBeginImageContextWithOptions(itemSize, NO, [UIScreen mainScreen].scale);
             CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-            UIBezierPath *bezierpath = [UIBezierPath bezierPathWithRoundedRect:imageRect cornerRadius:5.0];
-            [bezierpath addClip];
             [image drawInRect:imageRect];
             self.ebookItem.avatarIcon = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();

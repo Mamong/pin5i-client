@@ -1,6 +1,6 @@
 //
 //  MoreViewController.m
-//  LoadCocoaChinaTest
+//  Pin5i-Client
 //
 //  Created by mamong on 14-3-16.
 //  Copyright (c) 2014年 mamong. All rights reserved.
@@ -15,6 +15,7 @@
 #define kBaiduTokenRequest               101
 #define kBaiduCodestringCheckRequest     102
 #define kBaiduLoginRequest               103
+#define kStateCheckRequest               104
 
 
 #define kServiceName @"com.mamong.baidu_login"
@@ -25,7 +26,7 @@
 
 @interface BaiduLoginController ()<UIAlertViewDelegate>{
    
-    
+    ASIHTTPRequest *stateCheckRequest;
 }
 // the login button
 @property (weak, nonatomic) IBOutlet JNJProgressButton *loginButton;
@@ -51,6 +52,7 @@
     if (self) {
         // Custom initialization
         _isReady = NO;
+        _isOnBaidu = NO;
     }
     return self;
 }
@@ -101,7 +103,7 @@
     }
 
      self.isReady = NO;
-    [self isOnBaiduCheck];
+    [self sendStateCheckRequest];
     [self setupLoginButton];
 }
 
@@ -152,13 +154,18 @@
 
 - (void)login:(id)sender
 {
+    if ([stateCheckRequest isExecuting]) {
+        [stateCheckRequest cancel];
+    }
+
     self.username = self.userNameTF.text;
     self.password = self.keyTF.text;
     if([self.username length] == 0 ||
        [self.password length] == 0) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码或用户名不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
-    } else {
+        [self cancelLoginButton];
+    } else if([self.username length] &&[self.password length]){
         if (self.loginButton.JNJState == JNJProgressButtonStateProgressing) {
             // if is ready to login,send login request only
             if (self.isReady) {
@@ -205,13 +212,26 @@
     
     if (request.tag == kBaiduIDRequest) {
         NSLog(@"error id");
+        [self handleError:@"error id"];
+        [self cancelLoginButton];
     }else if (request.tag == kBaiduTokenRequest){
         NSLog(@"error token");
+        [self handleError:@"error token"];
+        [self cancelLoginButton];
     }else if (request.tag == kBaiduCodestringCheckRequest){
         NSLog(@"error code");
+        [self handleError:@"error code"];
+        [self cancelLoginButton];
     }else if (request.tag == kBaiduLoginRequest){
         NSLog(@"error login");
+        [self handleError:@"error login"];
+        [self cancelLoginButton];
+    }else if (request.tag == kStateCheckRequest){
+        NSLog(@"error check state");
+        [self handleError:@"error check state"];
+// check request is sent automatically,so we do not need to send action to cancel it
     }
+    self.isOnBaidu = NO;
 }
 
 
@@ -234,8 +254,6 @@
         }else if (request.tag == kBaiduTokenRequest){
             //从请求到的字符串中解析出token
             NSString *responseString = [request responseString];
-            
-            
 #ifdef MSDEBUG
             NSLog(@"responseString ====%@========",responseString);
 #endif
@@ -283,7 +301,6 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&serializationEror];
             id codeString = [dict objectForKey:@"codestring"];
             self.codeString = codeString;
-            NSLog(@"code stinrg is %@",self.codeString);
             if ([self.codeString isKindOfClass:[NSNull class]]) {
                 
                 // now,it's time to login baidu.
@@ -335,10 +352,13 @@
             
             switch (error_no) {
                 case 0:
-                {   NSLog(@"login success");
-                    [self.loginButton setProgress:1.0 animated:NO];
-                    self.loginButton.backgroundColor = [UIColor whiteColor];
-                    [self handleError:@"login success"];
+                {
+                    if([self isOnBaiduCheck]){
+                        NSLog(@"login success");
+                        [self.loginButton setProgress:1.0 animated:NO];
+                        [self handleError:@"login success"];
+                    }else
+                        [self.loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
                     break;
                 }
                 case 1:
@@ -366,10 +386,9 @@
                 }
                 case 100023:
                 {
-                    NSLog(@"you have logined already");
-                    [self.loginButton setProgress:1.0 animated:NO];
-                    self.loginButton.backgroundColor = [UIColor whiteColor];
+                    NSLog(@"you need login again");
                     [self handleError:@"you have logined already"];
+                    [self cancelLoginButton];
                     break;
                 }
                 case 119998:
@@ -382,12 +401,33 @@
                 {
                     NSLog(@"unknown error");
                     [self handleError:@"unknown error"];
-                    [self.loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                    [self cancelLoginButton]; 
                     break;
                 }
             }
+    }else if (request.tag == kStateCheckRequest){
+        NSLog(@"response string:%@",[request responseString]);
+        NSError *error = nil;
+        NSMutableString *MutString = [NSMutableString stringWithString:[request responseString]];
+        [MutString replaceOccurrencesOfString:@"\'" withString:@"\"" options:NSRegularExpressionSearch range:NSMakeRange(0, [MutString length])];//fuck baidu,using unstandard json format
+        NSData *data = [MutString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        if (!error) {
+            NSDictionary *errInfo = [resultDict objectForKey:@"errInfo"];
+            NSDictionary *dataDict = [resultDict objectForKey:@"data"];
+            NSString *erro_no = [errInfo objectForKey:@"no"];
+            NSString *username = [dataDict objectForKey:@"rememberedUserName"];
+            
+// we check the error number and the remembered username to confirm our state
+// usually,the user name is the key factor.
+            if ([erro_no isEqualToString:@"0"]&&[self.userNameTF.text isEqualToString:username]) {
+                self.isOnBaidu = YES;
+            }else
+                self.isOnBaidu = NO;
+        }else
+            NSLog(@"error is %@",[error description]);
+        
     }
-
     
 }
 
@@ -421,6 +461,8 @@
     [self requestCommonSetup:loginRequest];
     [loginRequest startAsynchronous];
 }
+
+
 
 - (void)setVerifyImgWithCodeString
 {
@@ -467,6 +509,17 @@
 }
 
 
+- (void)sendStateCheckRequest
+{
+    stateCheckRequest = [[ASIHTTPRequest alloc]initWithURL:[NSURL URLWithString:@"https://passport.baidu.com/v2/api/?getapi&tpl=ik&apiver=v3&tt=1371883487&class=login"]];
+    stateCheckRequest.tag = kStateCheckRequest;
+    [stateCheckRequest setRequestMethod:@"Get"];
+    [self requestCommonSetup:stateCheckRequest];
+    [stateCheckRequest startAsynchronous];
+}
+
+// used after login request has been sent,to check login success or not
+// in most case,you can judge it by the response data
 - (BOOL)isOnBaiduCheck
 {
     BOOL contain = NO;
@@ -480,6 +533,8 @@
     return self.isOnBaidu = YES;
 }
 
+
+// just to clear cookies and make you offline with baidu
 - (void)clearCookies
 {
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -574,6 +629,7 @@
 }
 
 
+
 - (IBAction) textFieldDoneEditing:(id)sender
 {
     [sender resignFirstResponder];
@@ -581,7 +637,12 @@
 }
 
 - (IBAction) textFieldChanged:(id)sender{
-    [self clearCookies];
+// if current sate is on,while we do some change to our login infomation
+// we should check the state right now.on the other hand,we do not need
+// check too frequently.
+    if (self.isOnBaidu) {
+        [self sendStateCheckRequest];
+    }
 }
 
 
@@ -590,6 +651,14 @@
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:[NSNumber numberWithBool:self.passkeySwitch.on] forKey:kBaiduSwitchState];
+}
+
+
+- (void)cancelLoginButton
+{
+    if (self.loginButton.JNJState == JNJProgressButtonStateProgressing) {
+        [self.loginButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 #pragma mark -
@@ -633,10 +702,10 @@
     if ([keyPath isEqualToString:@"isOnBaidu"]) {
         if ([self isOnBaidu]) {
             [self.loginButton setNeedsProgress:NO];
-            self.loginButton.backgroundColor = [UIColor whiteColor];
+            self.loginButton.backgroundColor = [UIColor orangeColor];
         }else{
             [self.loginButton setNeedsProgress:YES];
-            self.loginButton.backgroundColor = [UIColor orangeColor];
+            self.loginButton.backgroundColor = [UIColor whiteColor];
         }
 
     }

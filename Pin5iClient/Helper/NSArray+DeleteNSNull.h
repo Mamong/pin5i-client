@@ -1,6 +1,6 @@
 //
 //  NSArray+DeleteNSNull.h
-//  LoadCocoaChinaTest
+//  Pin5i-Client
 //
 //  Created by mamong on 14-3-31.
 //  Copyright (c) 2014年 mamong. All rights reserved.

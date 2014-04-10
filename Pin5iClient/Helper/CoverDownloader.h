@@ -1,6 +1,6 @@
 //
 //  CoverDownloader.h
-//  LoadCocoaChinaTest
+//  Pin5i-Client
 //
 //  Created by mamong on 14-3-20.
 //  Copyright (c) 2014年 mamong. All rights reserved.

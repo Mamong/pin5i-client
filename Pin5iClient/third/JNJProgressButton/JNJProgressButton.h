@@ -101,4 +101,7 @@ typedef void(^JNJProgressButtonBlockAction)(JNJProgressButton *button);
 - (void)setProgress:(float)progress
            animated:(BOOL)animated;
 
+
+
+
 @end

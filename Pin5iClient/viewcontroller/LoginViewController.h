@@ -1,6 +1,6 @@
 //
 //  ViewController.h
-//  LoadCocoaChinaTest
+//  Pin5i-Client
 //
 //  Created by mamong on 13-12-15.
 //  Copyright (c) 2013年 mamong. All rights reserved.
