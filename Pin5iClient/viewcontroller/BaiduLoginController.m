@@ -228,7 +228,6 @@
         [self cancelLoginButton];
     }else if (request.tag == kStateCheckRequest){
         NSLog(@"error check state");
-        [self handleError:@"error check state"];
 // check request is sent automatically,so we do not need to send action to cancel it
     }
     self.isOnBaidu = NO;
@@ -408,9 +407,9 @@
     }else if (request.tag == kStateCheckRequest){
         NSLog(@"response string:%@",[request responseString]);
         NSError *error = nil;
-        NSMutableString *MutString = [NSMutableString stringWithString:[request responseString]];
-        [MutString replaceOccurrencesOfString:@"\'" withString:@"\"" options:NSRegularExpressionSearch range:NSMakeRange(0, [MutString length])];//fuck baidu,using unstandard json format
-        NSData *data = [MutString dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *string = [[request responseString] stringByReplacingOccurrencesOfString:@"\'" withString:@"\""];
+        //fuck baidu,using unstandard json format
+        NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *resultDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         if (!error) {
             NSDictionary *errInfo = [resultDict objectForKey:@"errInfo"];
