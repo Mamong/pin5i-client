@@ -29,7 +29,6 @@
     MJRefreshFooterView *_footer;
     MJRefreshHeaderView *_header;
     BOOL isRefresh;                // to distinguish refresh and download more
-    NSUInteger firstPageItemCount; // to remember the items' index to refresh
     
 }
 
@@ -117,16 +116,15 @@
 //        [_ebookList removeAllObjects];
 //    }
     _data = nil;
-    
     [_connection cancel];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self setHidesBottomBarWhenPushed:NO];
 
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self resetMJRefreshView];
 }
 
 
@@ -149,7 +147,7 @@
 #endif
     self.eBookListURL = [NSString stringWithFormat:@"http://www.pin5i.com/%@/%d/",url,pageNum];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:
-                                [NSURL URLWithString:self.eBookListURL]cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:kRequestTimeoutInterval];
+                                [NSURL URLWithString:self.eBookListURL]cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kRequestTimeoutInterval];
 
     self.connection = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
     if (self.connection) {
@@ -262,11 +260,12 @@
                 dispatch_group_async(aGroup, aQueue, ^{
                     dateArray = [HTMLParseHelp basicTextParseFromData:self.data withXpath:@"//*[@id='threadlist']/tbody/tr/td[3]/em/text()" options:MSHTMLParseDefault alterItem:nil];
                 });
+                
 
                 dispatch_group_wait(aGroup, DISPATCH_TIME_FOREVER);
-#ifdef MSDEBUG
-                NSLog(@"=========item parse finished===================");
-#endif
+//#ifdef MSDEBUG
+                NSLog(@"=========item parse finished=============item count %d======",[titleArray count]);
+//#endif
                 
                 if ([titleArray count]) {
                     dispatch_apply([titleArray count], aQueue, ^(size_t i){   
@@ -277,24 +276,21 @@
                         [item setAuthorURL:[authorURLrray objectAtIndex:i]];
                         [item setAvatarURL:[[authorURLrray objectAtIndex:i]userInfoStringToAvatarString]];
                         [item setLink:[linkArray objectAtIndex:i]];
-                        [list addObject:item];
+                        [list addObject:item];NSLog(@"titleArray objectAtIndex:i is %@",[titleArray objectAtIndex:i]);
                     });
                     
-// record the indexs of the first page's items
-                    if (self.currentPage == 1) {
-                        firstPageItemCount = [list count];
-                    }
+
 // deal with refreshing and downloading
                     if (isRefresh == NO) {
                         [self.ebookList addObjectsFromArray:list];
-                    }else if ([list count]){
-                        [self.ebookList replaceObjectsInRange:NSMakeRange(0, firstPageItemCount) withObjectsFromArray:list];
+                        self.currentPage ++;
+                    }else {
+                        [self.ebookList setArray:list];
 // after refreshing,should reset the bool variable isRefresh to no
                         isRefresh = NO;
                     }
                     
                     [self.ebookListTab reloadData];
-                    self.currentPage ++;
                 }
             }else if(self.requestPageIndex > self.totalPageNum){
                 [self handleError:@"没有更多了..."];

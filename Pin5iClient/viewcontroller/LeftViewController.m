@@ -29,9 +29,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UITabBarItem *thirdItem = [[UITabBarItem alloc]initWithTabBarSystemItem:UITabBarSystemItemMore tag:102];
-    [self setTabBarItem:thirdItem];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,11 +114,13 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             LoginViewController *loginVC = [[LoginViewController alloc]init];
-            [self presentViewController:loginVC animated:YES completion:nil];
+            UINavigationController *loginNav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+            [self presentViewController:loginNav animated:YES completion:nil];
         }
     }else if (indexPath.section == 1){
         BaiduLoginController *baiduLoginVC = [[BaiduLoginController alloc]init];
-        [self presentViewController:baiduLoginVC animated:YES completion:nil];
+        UINavigationController *baiduNav = [[UINavigationController alloc]initWithRootViewController:baiduLoginVC];
+        [self presentViewController:baiduNav animated:YES completion:nil];
     }
 }
 

@@ -26,14 +26,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.title = @"登陆";
     self.verifyImg.image = [UIImage imageNamed:@"placeholder"];
     [(UIControl *)self.view addTarget:self action:@selector(resignKeyBoard) forControlEvents:UIControlEventTouchDown];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissLoginVC)];
-    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
-    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"Pin5i登陆", @"")];
-    item.rightBarButtonItem = rightItem;
-    [topbar pushNavigationItem:item animated:YES];
-    [self.view addSubview:topbar];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                              target:self
+                                                                              action:@selector(dismissLoginVC)];
+    [self.navigationItem setRightBarButtonItem:rightItem];
+//    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
+//    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"Pin5i登陆", @"")];
+//    item.rightBarButtonItem = rightItem;
+//    [topbar pushNavigationItem:item animated:YES];
+//    [self.view addSubview:topbar];
     
 // get switch state from userdefaults
     BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kPin5iSwitchState]boolValue];

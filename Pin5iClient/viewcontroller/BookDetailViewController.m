@@ -179,9 +179,6 @@ static BOOL _animated = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         isLoading = NO;
         if (data) {
-// if data is available, set the indicator label text "success"
-            [indicatorModal.titleLabel setTextColor:[UIColor yellowColor]];
-            [indicatorModal.titleLabel setText:@"Success!"];
             
 // start to parse the html data
             dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -252,7 +249,9 @@ static BOOL _animated = YES;
 #ifdef MSDEBUG
             NSLog(@"weakSelf.ebookDetail.extractCodeArray is %@",[weakSelf.ebookDetail.extractCodeArray description]);
 #endif
-            
+            // if data is available, set the indicator label text "success"
+            [indicatorModal.titleLabel setTextColor:[UIColor yellowColor]];
+            [indicatorModal.titleLabel setText:@"Success!"];
         }else{
             NSLog(@"error is %@",[error description]);
             [indicatorModal.titleLabel setTextColor:[UIColor yellowColor]];

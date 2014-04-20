@@ -145,7 +145,6 @@
 {
     [self.revealSideViewController replaceAfterOpenedCompletelyWithOffset:120 animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
-    
 
 }
 @end

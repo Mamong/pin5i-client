@@ -69,12 +69,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.title = @"登陆";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissLoginVC)];
-    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
-    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"登陆", @"")];
-    item.rightBarButtonItem = rightItem;
-    [topbar pushNavigationItem:item animated:YES];
-    [self.view addSubview:topbar];
+    [self.navigationItem setRightBarButtonItem:rightItem];
+//    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
+//    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"登陆", @"")];
+//    item.rightBarButtonItem = rightItem;
+//    [topbar pushNavigationItem:item animated:YES];
+//    [self.view addSubview:topbar];
     
     BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kBaiduSwitchState]boolValue];
     [self.passkeySwitch setOn:isOn];
@@ -132,6 +134,12 @@
     if ([self.passkeySwitch isOn]) {
         [self saveLoginInfo];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+    [stateCheckRequest cancel];
 }
 
 
