@@ -427,7 +427,9 @@
             
 // we check the error number and the remembered username to confirm our state
 // usually,the user name is the key factor.
-            if ([erro_no isEqualToString:@"0"]&&[self.userNameTF.text isEqualToString:username]) {
+            if ([erro_no isEqualToString:@"0"]&&
+                       [self.userNameTF.text isEqualToString:username]&&[self isOnBaiduCheck])
+            {
                 self.isOnBaidu = YES;
             }else
                 self.isOnBaidu = NO;
@@ -522,7 +524,7 @@
     stateCheckRequest.tag = kStateCheckRequest;
     [stateCheckRequest setRequestMethod:@"Get"];
     [self requestCommonSetup:stateCheckRequest];
-    [stateCheckRequest startAsynchronous];
+    [stateCheckRequest startAsynchronous];NSLog(@"is on baidu %d",[self isOnBaiduCheck]);
 }
 
 // used after login request has been sent,to check login success or not
