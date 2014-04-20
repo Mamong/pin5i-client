@@ -288,6 +288,7 @@
                         [self.ebookList setArray:list];
 // after refreshing,should reset the bool variable isRefresh to no
                         isRefresh = NO;
+                        self.currentPage = 1;
                     }
                     
                     [self.ebookListTab reloadData];
@@ -497,15 +498,21 @@
 
 
 #pragma mark 代理方法-进入刷新状态就会调用
+// when first enter list page, refreshing and loading more operations are forbidden.
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
     if (_header == refreshView) {
         isRefresh = YES;
-        [self startDownloadWithColumn:self.column page:1];
+        if (self.currentPage != 0) {
+            [self startDownloadWithColumn:self.column page:1];
+        }
+        
     }else{
         isRefresh = NO;
         int page = self.currentPage;
-        [self startDownloadWithColumn:self.column page:++page];
+        if (page != 0) {
+            [self startDownloadWithColumn:self.column page:++page];
+        }
     }
 }
 

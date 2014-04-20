@@ -21,6 +21,7 @@
 #define kServiceName @"com.mamong.baidu_login"
 #define kBaiduUserName @"baidu_username"
 #define kBaiduSwitchState @"baidu_switch_state"
+#define kLastBaiduToken   @"baidu_last_token"
 
 #define keyCookiesArray @[@"BDUSS", @"PTOKEN", @"STOKEN", @"SAVEUSERID"]
 
@@ -139,7 +140,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:YES];
-    [stateCheckRequest cancel];
+    [stateCheckRequest clearDelegatesAndCancel];
 }
 
 
@@ -281,7 +282,7 @@
                 self.token = nil;
             }else {
                 self.token = supposeContent;
-                
+                [self saveLastToken];
                 //接着发起下一次请求,用于检查是否要验证码
                 ASIFormDataRequest *codeRequest = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://passport.baidu.com/v2/api/?logincheck&callback=bdPass.api.login._needCodestringCheckCallback&tpl=pp&charset=utf-8&index=0&username=%@&time=1345429566039",self.username]]];
                 codeRequest.tag = kBaiduCodestringCheckRequest;
@@ -424,10 +425,15 @@
             NSDictionary *dataDict = [resultDict objectForKey:@"data"];
             NSString *erro_no = [errInfo objectForKey:@"no"];
             NSString *username = [dataDict objectForKey:@"rememberedUserName"];
-            
+            id token = [dataDict objectForKey:@"token"];
+            id lastToken = [[NSUserDefaults standardUserDefaults]objectForKey:kLastBaiduToken];NSLog(@"lastToken is %@",lastToken);
+            BOOL tokenChange = YES;
+            if (token&&lastToken) {
+                tokenChange = [lastToken isEqualToString:token]?NO:YES;
+            }
 // we check the error number and the remembered username to confirm our state
 // usually,the user name is the key factor.
-            if ([erro_no isEqualToString:@"0"]&&
+            if (!tokenChange&&[erro_no isEqualToString:@"0"]&&
                        [self.userNameTF.text isEqualToString:username]&&[self isOnBaiduCheck])
             {
                 self.isOnBaidu = YES;
@@ -553,6 +559,16 @@
     }
     [self isOnBaiduCheck];
 }
+
+
+//
+- (void)saveLastToken
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:self.token forKey:kLastBaiduToken];
+}
+
+
 
 // -------------------------------------------------------------------------------
 //	method name
