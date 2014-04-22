@@ -34,11 +34,7 @@
                                                                               target:self
                                                                               action:@selector(dismissLoginVC)];
     [self.navigationItem setRightBarButtonItem:rightItem];
-//    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
-//    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"Pin5i登陆", @"")];
-//    item.rightBarButtonItem = rightItem;
-//    [topbar pushNavigationItem:item animated:YES];
-//    [self.view addSubview:topbar];
+
     
 // get switch state from userdefaults
     BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kPin5iSwitchState]boolValue];
@@ -176,15 +172,10 @@
 #endif
 }
 
--(void)handleError:(NSString *)errorInfo
-{
-    UIAlertView *alertView =
-    [[UIAlertView alloc]initWithTitle:@"验证结果" message:errorInfo delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    alertView.tag = 100;
-    [alertView show];
-}
 
 
+#pragma mark -
+#pragma mark Textfield, switch, alertview addition
 -(void)resignKeyBoard
 {
     [self.userNameTF resignFirstResponder];
@@ -204,8 +195,16 @@
     [user setObject:[NSNumber numberWithBool:self.passkeySwitch.on] forKey:kPin5iSwitchState];
 }
 
-///////////////////////////////////////////////////////////////////
+-(void)handleError:(NSString *)errorInfo
+{
+    UIAlertView *alertView =
+    [[UIAlertView alloc]initWithTitle:@"验证结果" message:errorInfo delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    alertView.tag = 100;
+    [alertView show];
+}
 
+///////////////////////////////////////////////////////////////////
+#pragma mark -
 #pragma mark UIAlertView Delegate Methods
 
 //---------------------------------------------------------

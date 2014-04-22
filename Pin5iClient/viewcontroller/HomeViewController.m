@@ -37,6 +37,7 @@ static int _offset = 120;
 
 @implementation HomeViewController
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,6 +53,14 @@ static int _offset = 120;
     }
     return self;
 }
+
+
+- (void)dealloc
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self];
+}
+
 
 - (void)viewDidLoad
 {
@@ -101,7 +110,8 @@ static int _offset = 120;
     [self performSelector:@selector(preloadView) withObject:nil afterDelay:0.3];
 }
 
-/////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark UITableViewDataSource methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -142,10 +152,7 @@ static int _offset = 120;
     
 }
 
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return [sectionTitle objectAtIndex:section];
-//}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -185,6 +192,8 @@ static int _offset = 120;
 }
 
 
+#pragma mark -
+#pragma mark pprevealSideViewController methods
 // -------------------------------------------------------------------------------
 //	pprevealSideViewController start
 // -------------------------------------------------------------------------------
@@ -225,9 +234,8 @@ static int _offset = 120;
 //	pprevealSideViewController end
 // -------------------------------------------------------------------------------
 
-
-
-
+#pragma mark -
+#pragma mark update  Subscription Datasource
 - (void)updateSubscriptionDatasource:(NSNotification *)notification
 {
     MSUserCenter *userCenter = [MSUserCenter sharedUserCenter];
@@ -261,9 +269,5 @@ static int _offset = 120;
 
 
 
-- (void)dealloc
-{
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self];
-}
+
 @end

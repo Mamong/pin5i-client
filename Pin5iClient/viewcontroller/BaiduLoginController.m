@@ -58,7 +58,10 @@
     return self;
 }
 
-
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"isOnBaidu"];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,11 +76,7 @@
     self.title = @"登陆";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissLoginVC)];
     [self.navigationItem setRightBarButtonItem:rightItem];
-//    UINavigationBar *topbar = [[UINavigationBar  alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 40)];
-//    UINavigationItem *item = [[UINavigationItem alloc ]initWithTitle:NSLocalizedString(@"登陆", @"")];
-//    item.rightBarButtonItem = rightItem;
-//    [topbar pushNavigationItem:item animated:YES];
-//    [self.view addSubview:topbar];
+
     
     BOOL isOn = [[[NSUserDefaults standardUserDefaults]objectForKey:kBaiduSwitchState]boolValue];
     [self.passkeySwitch setOn:isOn];
@@ -86,10 +85,7 @@
 }
 
 
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"isOnBaidu"];
-}
+
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -111,22 +107,7 @@
 }
 
 
-- (void)setupLoginButton
-{
-        //self.loginButton.tintColor = [UIColor blueColor];
-        self.loginButton.startButtonImage = [UIImage imageNamed:@"56-cloud"];
-        
-        self.loginButton.endButtonImage = [UIImage imageNamed:@"56-cloud"];
-    
-        
-        __weak typeof(self) weak_self = self;
-        self.loginButton.startButtonDidTapBlock = ^(JNJProgressButton *button){
-            [weak_self startProgressWithButton:button];
-        };
-        self.loginButton.endButtonDidTapBlock = ^(JNJProgressButton *button){
-            [weak_self endProgressWithButton:button];
-        };
-}
+
 
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -143,6 +124,22 @@
     [stateCheckRequest clearDelegatesAndCancel];
 }
 
+- (void)setupLoginButton
+{
+    //self.loginButton.tintColor = [UIColor blueColor];
+    self.loginButton.startButtonImage = [UIImage imageNamed:@"56-cloud"];
+    
+    self.loginButton.endButtonImage = [UIImage imageNamed:@"56-cloud"];
+    
+    
+    __weak typeof(self) weak_self = self;
+    self.loginButton.startButtonDidTapBlock = ^(JNJProgressButton *button){
+        [weak_self startProgressWithButton:button];
+    };
+    self.loginButton.endButtonDidTapBlock = ^(JNJProgressButton *button){
+        [weak_self endProgressWithButton:button];
+    };
+}
 
 - (void)saveLoginInfo
 {
@@ -395,7 +392,7 @@
                 case 100023:
                 {
                     NSLog(@"you need login again");
-                    [self handleError:@"you have logined already"];
+                    [self handleError:@"you need login again"];
                     [self cancelLoginButton];
                     break;
                 }
@@ -457,7 +454,7 @@
     }
     NSMutableData *postData = [NSMutableData dataWithData:[post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     [request setPostBody:postData];
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%zd",[postData length]];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:postLength forKey:@"Content-Length"];
     [dict setObject:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];

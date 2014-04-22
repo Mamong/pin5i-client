@@ -79,8 +79,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="548">
-                    <rect key="frame" x="147" y="322" width="33" height="30"/>
+                    <rect key="frame" x="147" y="322" width="64" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.95635401730000003" green="0.7947945569" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="login">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

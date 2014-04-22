@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *fileNameTF;
 @property (nonatomic, strong) IBOutlet UILabel *extractCodeTF;
 @property (nonatomic, strong) IBOutlet UIView *view;
+@property (nonatomic, assign, readonly) BOOL isExtracting;
 
 - (void)startToExtractFile;
 - (IBAction)saveFileToMyBaiduPan:(id )sender;

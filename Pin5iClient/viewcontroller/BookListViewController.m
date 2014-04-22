@@ -109,16 +109,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    if (self.needLoad) {
-//        _currentPage = 0;
-//        _totalPageNum = 0;
-//        _requestPageIndex = 0;
-//        [_ebookList removeAllObjects];
-//    }
     _data = nil;
     [_connection cancel];
     [self setHidesBottomBarWhenPushed:NO];
-
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -167,7 +160,7 @@
 }
 
 ///////////////////////////////////////////////////////////////////
-
+#pragma mark -
 #pragma mark UIAlertView Delegate Methods
 
 //---------------------------------------------------------
@@ -264,7 +257,7 @@
 
                 dispatch_group_wait(aGroup, DISPATCH_TIME_FOREVER);
 //#ifdef MSDEBUG
-                NSLog(@"=========item parse finished=============item count %d======",[titleArray count]);
+                NSLog(@"=========item parse finished=============item count %lu======",[titleArray count]);
 //#endif
                 
                 if ([titleArray count]) {

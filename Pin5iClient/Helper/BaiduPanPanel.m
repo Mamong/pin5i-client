@@ -19,6 +19,7 @@
 @property (nonatomic, copy) NSString *bdstoken;
 @property (nonatomic, strong) NSMutableData *filePageData;
 @property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, assign) BOOL isExtracting;
 @end
 
 
@@ -26,6 +27,14 @@
 
 @implementation BaiduPanPanel
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _isExtracting = NO;
+    }
+    return self;
+}
 
 
 - (void)startToExtractFile
@@ -41,6 +50,7 @@
     [theRequest setDidFailSelector:@selector(requestFailed:)];
     [theRequest setDidFinishSelector:@selector(requestFinished:)];
     [theRequest startAsynchronous];
+    self.isExtracting = YES;
 #ifdef MSDEBUG
     
     NSLog(@"current ====%@========",NSStringFromSelector(_cmd));
@@ -84,10 +94,12 @@
 - (void)requestFailed:(ASIHTTPRequest *)request{
     if (request.tag == kVerifyRequest) {
         [self handleError:@"failed to send verify request"];
+         self.isExtracting = NO;
     }
     else if (request.tag == kSaveFileRequest){
         [self handleError:@"failed to send save request"];
     }
+   
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request{ //verify提交提取码之后 link发送请求
@@ -299,7 +311,7 @@
             NSLog(@"您尚未登陆百度");
         }
     });
-    
+     self.isExtracting = NO;
 
 }
 

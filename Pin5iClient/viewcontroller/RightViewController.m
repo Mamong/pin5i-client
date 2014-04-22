@@ -10,7 +10,7 @@
 #import "SubscriptionViewController.h"
 #import "PPRevealSideViewController.h"
 
-@interface RightViewController ()<UINavigationControllerDelegate>
+@interface RightViewController ()
 
 @end
 
@@ -29,7 +29,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,11 +59,6 @@
 }
 
 
-#pragma mark -
-#pragma mark UINavigationControllerDelegate Methods
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    
-}
+
 
 @end

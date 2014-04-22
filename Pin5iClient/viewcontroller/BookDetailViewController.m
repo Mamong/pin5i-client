@@ -111,7 +111,6 @@ static BOOL _animated = YES;
     NSString *pageURL = [NSString stringWithFormat:@"http://www.pin5i.com%@",self.ebookDetail.ebookURL];
     NSLog(@"webview is loading %@",pageURL);
 
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self startDownLoadDetailPage];
 }
 
@@ -164,6 +163,8 @@ static BOOL _animated = YES;
 - (void)startDownLoadDetailPage
 {
     isLoading = YES;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
 // delay
     [self performSelector:@selector(showLoadingIndicator) withObject:nil afterDelay:kShowIndicatorDelayInterval];
     
@@ -222,8 +223,9 @@ static BOOL _animated = YES;
 #ifdef MSDEBUG
                 NSLog(@"description is %@",description);
 #endif
-
-                [weakSelf.webView loadHTMLString:description baseURL:[NSURL URLWithString:@"http://www.pin5i.com"]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.webView loadHTMLString:description baseURL:[NSURL URLWithString:@"http://www.pin5i.com"]];
+                });
             });
             
             dispatch_group_wait(aGroup, DISPATCH_TIME_FOREVER);
@@ -238,6 +240,7 @@ static BOOL _animated = YES;
                 
                 dispatch_apply([weakSelf.ebookDetail.eoLinkArray count], aQueue, ^(size_t i) {
                     [weakSelf.panlinkDict setObject:[NSNull null] forKey:[NSString stringWithFormat:@"%zd",i]];
+                    
                 });
             }
             weakSelf.ebookDetail.extractCodeArray = extractCodeArray;
@@ -245,7 +248,12 @@ static BOOL _animated = YES;
             weakSelf.ebookDetail.coverURLArray = coverArray;
             weakSelf.ebookDetail.coverSizeArray = sizeArray;
             weakSelf.ebookDetail.eoLinkArray = eolinkArray;
-            [weakSelf.swipeView reloadData];
+            
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [weakSelf.swipeView reloadData];
+            });
+            
 #ifdef MSDEBUG
             NSLog(@"weakSelf.ebookDetail.extractCodeArray is %@",[weakSelf.ebookDetail.extractCodeArray description]);
 #endif
@@ -257,14 +265,15 @@ static BOOL _animated = YES;
             [indicatorModal.titleLabel setTextColor:[UIColor yellowColor]];
             [indicatorModal.titleLabel setText:@"Failure!"];
         }
-        
+    
         [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
 //
-        double delayInSeconds = 1.0;
+        double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [weakSelf removeLoadingIndicator];
         });
+        
     }];
 }
 
@@ -450,8 +459,7 @@ static BOOL _animated = YES;
         }
         
         id panlink = [self.panlinkDict objectForKey:[NSString stringWithFormat:@"%d",clickIndex]];
-        if (lastIndex == clickIndex&&[panlink isKindOfClass:[NSString class]]) {
-            NSLog(@"last %d,i %d",lastIndex,clickIndex);
+        if (lastIndex == clickIndex&&[panlink isKindOfClass:[NSString class]]&&!self.baiduPanel.isExtracting) {
             [[self.baiduPanel extractCodeTF] setText:self.baiduPanel.extractCode];
             self.baiduPanel.panlink = panlink;
             __weak typeof(self) weakself = self;
@@ -492,7 +500,7 @@ static BOOL _animated = YES;
          else  {
               if ([[self.ebookDetail.coverArray objectAtIndex:index]isKindOfClass:[NSNull class]]) {
                   [imageView setImage:[UIImage imageNamed:@"cover"]];
-                  [self startCoverDownload:self.ebookDetail forIndex:index];
+                  [self startCoverDownload:self.ebookDetail forIndex:(int)index];
                         NSLog(@"start cover");
               }else if([[self.ebookDetail.coverArray objectAtIndex:index]isKindOfClass:[NSString class]]){
                   [imageView setImage:[UIImage imageNamed:@"outoftime"]];
@@ -519,7 +527,8 @@ static BOOL _animated = YES;
         if ([[self.ebookDetail.coverArray objectAtIndex:index]isKindOfClass:[NSNull class]]||
             [[self.ebookDetail.coverArray objectAtIndex:index]isKindOfClass:[NSString class]]||
             [[self.ebookDetail.coverSizeArray objectAtIndex:index] evaluateWithSize:[self.ebookDetail.coverDownloadSizeArray objectAtIndex:index]]) {
-            [self startCoverDownload:self.ebookDetail forIndex:index];
+
+            [self startCoverDownload:self.ebookDetail forIndex:(int)index];
         }else
             NSLog(@"enlarge");
     }
@@ -588,7 +597,7 @@ static BOOL _animated = YES;
 
 
 -(void)goBack:(id)sender
-{NSLog(@"goback");
+{
     if (_webView.canGoBack)
         [_webView goBack];
     else
@@ -710,7 +719,7 @@ static BOOL _animated = YES;
 
 - (void)buttonClicked:(id)sender
 {
-    NSLog(@"%d",[sender tag]);
+    NSLog(@"%ld",[sender tag]);
     
 }
 
