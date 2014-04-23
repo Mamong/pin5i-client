@@ -45,8 +45,5 @@ what to do next?
 2. support more baidu pan command,such as move or download files.
 3. clean code
 4. some necessary user settings,such as audio switch for refresh
-<<<<<<< HEAD
 5. fix more potential bugs
-=======
-5. fix more potential bugs
->>>>>>> 84fede583489c69605d95a197f10e37ec9ec8e39
+
