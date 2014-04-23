@@ -75,7 +75,7 @@
 
     NSString *post = [NSString stringWithFormat:@"path=/&filelist=%@&async=1&r=0.6657245443941149",self.filePath];
     NSMutableData *postData = [NSMutableData dataWithData:[post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
-    NSString *postLength = [NSString stringWithFormat:@"%d",[postData length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
     [header setObject:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
     [header setObject:postLength forKey:@"Content-Length"];
