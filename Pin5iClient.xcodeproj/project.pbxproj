@@ -117,6 +117,17 @@
 		E78D8C3918F277A5000CD6F1 /* SCGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B8718F2700D000CD6F1 /* SCGIFImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78D8C3A18F2781A000CD6F1 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B2618F2700D000CD6F1 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7ACE82F18F2DA1C00A45A2F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E7ACE82E18F2DA1C00A45A2F /* README.md */; };
+		E7AFA5B419075C5100E7397A /* UserCenterTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5B319075C5100E7397A /* UserCenterTabViewController.xib */; };
+		E7AFA5B819075D9300E7397A /* ExchangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFA5B619075D9300E7397A /* ExchangeViewController.m */; };
+		E7AFA5B919075D9300E7397A /* ExchangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5B719075D9300E7397A /* ExchangeViewController.xib */; };
+		E7AFA5BD19075DAC00E7397A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFA5BB19075DAC00E7397A /* UserInfoViewController.m */; };
+		E7AFA5BE19075DAC00E7397A /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5BC19075DAC00E7397A /* UserInfoViewController.xib */; };
+		E7AFA5C21907682000E7397A /* EmailBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFA5C01907682000E7397A /* EmailBoxViewController.m */; };
+		E7AFA5C31907682000E7397A /* EmailBoxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5C11907682000E7397A /* EmailBoxViewController.xib */; };
+		E7AFA5C7190769B500E7397A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFA5C5190769B500E7397A /* SettingsViewController.m */; };
+		E7AFA5C8190769B500E7397A /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5C6190769B500E7397A /* SettingsViewController.xib */; };
+		E7AFA5CC190769CC00E7397A /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFA5CA190769CC00E7397A /* AboutViewController.m */; };
+		E7AFA5CD190769CC00E7397A /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFA5CB190769CC00E7397A /* AboutViewController.xib */; };
 		E7B4E94C18F4D3E400170C82 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E78D8B2018F2700D000CD6F1 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -352,6 +363,22 @@
 		E78D8C2818F274BE000CD6F1 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightViewController.xib; sourceTree = "<group>"; };
 		E78D8C2918F274BE000CD6F1 /* SubscriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscriptionViewController.xib; sourceTree = "<group>"; };
 		E7ACE82E18F2DA1C00A45A2F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E7AFA5B319075C5100E7397A /* UserCenterTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCenterTabViewController.xib; sourceTree = "<group>"; };
+		E7AFA5B519075D9300E7397A /* ExchangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeViewController.h; sourceTree = "<group>"; };
+		E7AFA5B619075D9300E7397A /* ExchangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeViewController.m; sourceTree = "<group>"; };
+		E7AFA5B719075D9300E7397A /* ExchangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExchangeViewController.xib; sourceTree = "<group>"; };
+		E7AFA5BA19075DAC00E7397A /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		E7AFA5BB19075DAC00E7397A /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		E7AFA5BC19075DAC00E7397A /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
+		E7AFA5BF1907682000E7397A /* EmailBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailBoxViewController.h; sourceTree = "<group>"; };
+		E7AFA5C01907682000E7397A /* EmailBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailBoxViewController.m; sourceTree = "<group>"; };
+		E7AFA5C11907682000E7397A /* EmailBoxViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmailBoxViewController.xib; sourceTree = "<group>"; };
+		E7AFA5C4190769B500E7397A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		E7AFA5C5190769B500E7397A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		E7AFA5C6190769B500E7397A /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		E7AFA5C9190769CC00E7397A /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		E7AFA5CA190769CC00E7397A /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		E7AFA5CB190769CC00E7397A /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,7 +460,7 @@
 				E78D8ACB18F26FEB000CD6F1 /* view */,
 				E78D8ADB18F26FF9000CD6F1 /* viewcontroller */,
 				E78D8AFB18F27005000CD6F1 /* Helper */,
-				E78D8B1018F2700D000CD6F1 /* third */,
+				E78D8B1018F2700D000CD6F1 /* vendor */,
 				E78D8AAB18F26F34000CD6F1 /* AppDelegate.h */,
 				E78D8AAC18F26F34000CD6F1 /* AppDelegate.m */,
 				E78D8AAE18F26F34000CD6F1 /* Images.xcassets */,
@@ -516,6 +543,22 @@
 				E78D8AEA18F26FF9000CD6F1 /* SubscriptionViewController.h */,
 				E78D8AEB18F26FF9000CD6F1 /* SubscriptionViewController.m */,
 				E78D8C2918F274BE000CD6F1 /* SubscriptionViewController.xib */,
+				E7AFA5B519075D9300E7397A /* ExchangeViewController.h */,
+				E7AFA5B619075D9300E7397A /* ExchangeViewController.m */,
+				E7AFA5B719075D9300E7397A /* ExchangeViewController.xib */,
+				E7AFA5BA19075DAC00E7397A /* UserInfoViewController.h */,
+				E7AFA5BB19075DAC00E7397A /* UserInfoViewController.m */,
+				E7AFA5BC19075DAC00E7397A /* UserInfoViewController.xib */,
+				E7AFA5B319075C5100E7397A /* UserCenterTabViewController.xib */,
+				E7AFA5BF1907682000E7397A /* EmailBoxViewController.h */,
+				E7AFA5C01907682000E7397A /* EmailBoxViewController.m */,
+				E7AFA5C11907682000E7397A /* EmailBoxViewController.xib */,
+				E7AFA5C4190769B500E7397A /* SettingsViewController.h */,
+				E7AFA5C5190769B500E7397A /* SettingsViewController.m */,
+				E7AFA5C6190769B500E7397A /* SettingsViewController.xib */,
+				E7AFA5C9190769CC00E7397A /* AboutViewController.h */,
+				E7AFA5CA190769CC00E7397A /* AboutViewController.m */,
+				E7AFA5CB190769CC00E7397A /* AboutViewController.xib */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -551,7 +594,7 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		E78D8B1018F2700D000CD6F1 /* third */ = {
+		E78D8B1018F2700D000CD6F1 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
 				E7B4E94718F4D2C100170C82 /* STKeychain */,
@@ -565,7 +608,7 @@
 				E78D8B8818F2700D000CD6F1 /* SpinKit */,
 				E78D8B8D18F2700D000CD6F1 /* SwipeView */,
 			);
-			path = third;
+			path = vendor;
 			sourceTree = "<group>";
 		};
 		E78D8B1318F2700D000CD6F1 /* ASIHTTPRequest */ = {
@@ -906,6 +949,8 @@
 				E78D8C2B18F274BE000CD6F1 /* BookDetailViewController.xib in Resources */,
 				E78D8AA718F26F34000CD6F1 /* InfoPlist.strings in Resources */,
 				E78D8BF518F27031000CD6F1 /* block.png in Resources */,
+				E7AFA5CD190769CC00E7397A /* AboutViewController.xib in Resources */,
+				E7AFA5BE19075DAC00E7397A /* UserInfoViewController.xib in Resources */,
 				E78D8BFE18F27031000CD6F1 /* Default.png in Resources */,
 				E78D8C0618F27031000CD6F1 /* loading.png in Resources */,
 				E78D8BF318F27031000CD6F1 /* AvatarPlaceholder@2x.png in Resources */,
@@ -915,6 +960,7 @@
 				E78D8BF618F27031000CD6F1 /* blueLedSmall.png in Resources */,
 				E78D8B0B18F27005000CD6F1 /* BaiduPanPanel.xib in Resources */,
 				E78D8AAF18F26F34000CD6F1 /* Images.xcassets in Resources */,
+				E7AFA5C8190769B500E7397A /* SettingsViewController.xib in Resources */,
 				E78D8C2E18F274BE000CD6F1 /* LeftViewController.xib in Resources */,
 				E78D8C0B18F27031000CD6F1 /* placeholder.png in Resources */,
 				E78D8C0D18F27031000CD6F1 /* verifyOutOfTime.png in Resources */,
@@ -929,6 +975,7 @@
 				E78D8C3018F274BE000CD6F1 /* RightViewController.xib in Resources */,
 				E78D8C0E18F27031000CD6F1 /* woodpecker.gif in Resources */,
 				E78D8C0318F27031000CD6F1 /* expandableImage@2x.png in Resources */,
+				E7AFA5B919075D9300E7397A /* ExchangeViewController.xib in Resources */,
 				E78D8C2F18F274BE000CD6F1 /* LoginViewController.xib in Resources */,
 				E78D8C0818F27031000CD6F1 /* outoftime.png in Resources */,
 				E78D8C2C18F274BE000CD6F1 /* BookListViewController.xib in Resources */,
@@ -945,7 +992,9 @@
 				E78D8BF118F27031000CD6F1 /* account.png in Resources */,
 				E78D8C3118F274BE000CD6F1 /* SubscriptionViewController.xib in Resources */,
 				E78D8BF918F27031000CD6F1 /* blueLedSmallOff@2x.png in Resources */,
+				E7AFA5B419075C5100E7397A /* UserCenterTabViewController.xib in Resources */,
 				E78D8BF818F27031000CD6F1 /* blueLedSmallOff.png in Resources */,
+				E7AFA5C31907682000E7397A /* EmailBoxViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +1016,7 @@
 				E7B4E94C18F4D3E400170C82 /* ASIHTTPRequest.m in Sources */,
 				E78D8C3A18F2781A000CD6F1 /* ASINetworkQueue.m in Sources */,
 				E78D8C3918F277A5000CD6F1 /* SCGIFImageView.m in Sources */,
+				E7AFA5C21907682000E7397A /* EmailBoxViewController.m in Sources */,
 				E78D8C3818F27776000CD6F1 /* ASIFormDataRequest.m in Sources */,
 				E78D8C3718F27741000CD6F1 /* ASIInputStream.m in Sources */,
 				E78D8C3618F27737000CD6F1 /* Reachability.m in Sources */,
@@ -985,17 +1035,21 @@
 				E78D8AEE18F26FF9000CD6F1 /* BookListViewController.m in Sources */,
 				E78D8BC118F2700D000CD6F1 /* MJRefreshHeaderView.m in Sources */,
 				E78D8BB718F2700D000CD6F1 /* HEXCMyCustomTabBarControllerViewController.m in Sources */,
+				E7AFA5B819075D9300E7397A /* ExchangeViewController.m in Sources */,
 				E78D8AFA18F27000000CD6F1 /* EbookListItem.m in Sources */,
 				E78D8AEC18F26FF9000CD6F1 /* BaiduLoginController.m in Sources */,
 				E78D8AD718F26FEB000CD6F1 /* MSSectionHeaderView.m in Sources */,
 				E78D8AF218F26FF9000CD6F1 /* RightViewController.m in Sources */,
 				E78D8AF918F27000000CD6F1 /* EBookDetailItem.m in Sources */,
 				E78D8BBB18F2700D000CD6F1 /* TFHppleElement.m in Sources */,
+				E7AFA5BD19075DAC00E7397A /* UserInfoViewController.m in Sources */,
 				E78D8B0F18F27005000CD6F1 /* NSString+MSExtend.m in Sources */,
 				E78D8BBD18F2700D000CD6F1 /* JNJProgressButton.m in Sources */,
 				E78D8AD618F26FEB000CD6F1 /* MSIndicatorModal.m in Sources */,
 				E78D8AEF18F26FF9000CD6F1 /* HomeViewController.m in Sources */,
+				E7AFA5C7190769B500E7397A /* SettingsViewController.m in Sources */,
 				E78D8AF318F26FF9000CD6F1 /* SubscriptionViewController.m in Sources */,
+				E7AFA5CC190769CC00E7397A /* AboutViewController.m in Sources */,
 				E78D8BC218F2700D000CD6F1 /* PPRevealSideViewController.m in Sources */,
 				E78D8B0C18F27005000CD6F1 /* CoverDownloader.m in Sources */,
 				E78D8BB818F2700D000CD6F1 /* HEXCMyUIButton.m in Sources */,

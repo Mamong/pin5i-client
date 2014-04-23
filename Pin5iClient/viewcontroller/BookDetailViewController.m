@@ -267,7 +267,7 @@ static BOOL _animated = YES;
         }
     
         [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
-//
+# warning there exists a bug
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -611,6 +611,8 @@ static BOOL _animated = YES;
     }
 }
 
+#pragma mark -
+#pragma mark HEXCMyUIButton methods
 // -------------------------------------------------------------------------------
 //	method name
 // -------------------------------------------------------------------------------
@@ -720,11 +722,33 @@ static BOOL _animated = YES;
 - (void)buttonClicked:(id)sender
 {
     NSLog(@"%ld",[sender tag]);
+    UIButton *button = sender;
+    NSInteger index = button.tag;
+    switch (index) {
+        case 0:
+        {
+            [self downloadCurrentFile];
+            break;
+        }
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
     
 }
 
+#pragma mark HEXCMyUIButton tasks for each button
+- (void)downloadCurrentFile
+{
+    
+}
 
-
+#pragma mark indicator
 // -------------------------------------------------------------------------------
 //	show loading indicator
 // -------------------------------------------------------------------------------
